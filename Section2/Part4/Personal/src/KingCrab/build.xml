@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<project name="ChameleonCritter" default="run" basedir=".">
+
+<!--set varitions -->
+<property name="src.path" value="src"/>
+<property name="build.path" value="classes"/>
+<property name="test.path" value="test"/>
+<property name="lib.path" value="lib"/>
+<property name="report.path" value="report"/>
+
+<!--set classpath-->
+<path id="compile.path">
+	<fileset dir="${lib.path}">
+		<include name="*.jar"/>
+	</fileset>
+
+	<pathelement path="${build.path}"/>
+</path>
+
+<!--clean the history class-->
+<target name="clean">
+	<delete dir="${build.path}"/>
+</target>
+
+<!--compile the files-->
+<target name="compile">
+	<mkdir dir="${build.path}"/>
+	<javac srcdir="${src.path}" destdir="${build.path}" classpathref="compile.path" includeantruntime="on"/>
+	<javac srcdir="${test.path}" destdir="${build.path}" classpathref="compile.path" includeantruntime="on"/>
+</target>
+
+<!--run the jumperRunner class-->
+<target name="run" depends="clean, compile">
+	<java classname="KingCrabRunner" fork="yes" classpathref="compile.path"/>
+</target>
+
+<!--excute the test-->
+<target name="junit" depends="clean, compile, delete">
+	<mkdir dir="${report.path}"/>
+	<junit printsummary="true" fork='true'>
+		<formatter type="xml" usefile="true"/>
+		<classpath refid="compile.path"/>
+		<test name="JumperTest" todir="${report.path}" fork="true"/>
+	</junit>
+
+	<!--build a "html" report-->
+	<junitreport todir="${report.path}">
+		<fileset dir="${report.path}">
+			<include name="TEST-*.xml"/>
+		</fileset>
+		<report format="frames" todir="${report.path}"/>
+	</junitreport>
+</target>
+
+
+<!--delete test report-->
+<target name="delete">
+	<delete dir="${report.path}"/>
+</target>
+</project>
+

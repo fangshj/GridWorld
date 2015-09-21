@@ -1,0 +1,149 @@
+/* 
+ * AP(r) Computer Science GridWorld Case Study:
+ * Copyright(c) 2002-2006 College Entrance Examination Board 
+ * (http://www.collegeboard.com).
+ *
+ * This code is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation.
+ *
+ * This code is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * @author Alyce Brady
+ * @author APCS Development Committee
+ * @author Cay Horstmann
+ */
+
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.LinkedList; 
+import info.gridworld.grid.AbstractGrid;
+import info.gridworld.grid.Location;
+
+/**
+ * A <code>SparseBoundedGrid</code> is a rectangular grid with a large number of
+ * rows and columns and is bounded. <br />
+ * The implementation of this class is testable on the AP CS AB exam.
+ */
+public class SparseBoundedGrid2<E> extends AbstractGrid<E>
+{
+	private HashMap<Location, E> occupantArray; // the array storing the grid HashMap
+	private int colAll = 0;
+	private int rowAll = 0;
+
+	/**
+	 * Constructs an empty bounded grid with the given dimensions.
+	 * (Precondition: <code>rows > 0</code> and <code>cols > 0</code>.)
+	 * @param rows number of rows in SparseBoundedGrid
+	 * @param cols number of columns in SparseBoundedGrid
+	 */
+	public SparseBoundedGrid2(int rows, int cols)
+	{
+		if (rows <= 0) {
+			throw new IllegalArgumentException("rows <= 0");
+		}
+		if (cols <= 0) {
+			throw new IllegalArgumentException("cols <= 0");
+		}
+		occupantArray = new HashMap<Location, E> ();
+		colAll = cols;
+		rowAll = rows;
+	}
+
+	public int getNumRows()
+	{
+		return rowAll;
+	}
+
+	public int getNumCols()
+	{
+		return colAll;
+	}
+
+	public boolean isValid(Location loc)
+	{
+		return 0 <= loc.getRow() && loc.getRow() < getNumRows()
+			&& 0 <= loc.getCol() && loc.getCol() < getNumCols();
+	}
+/*
+	public ArrayList<Location> getOccupiedLocations()
+	{
+		ArrayList<Location> theLocations = new ArrayList<Location>();
+
+		for (int i = 0; i < rowAll; i++) {
+			for (OccupantInCol node : occupantArray.get(i)) {
+				theLocations.add(new Location(i, node.getCol()));	
+			}	
+		}
+		return theLocations;
+	}
+*/
+// get the Location in grid.
+	public ArrayList<Location> getOccupiedLocations()
+	{
+		ArrayList<Location> a = new ArrayList<Location>();
+		for (Location loc : occupantArray.keySet()) {
+			a.add(loc);
+		}
+		return a;
+	}
+// return the E 
+	public E get(Location loc)
+	{
+		if (!isValid(loc)) {
+			throw new IllegalArgumentException("Location " + loc
+					+ " is not valid");
+		}
+
+		// return the object in list
+		return occupantArray.get(loc); 
+	}
+
+	public E put(Location loc, E obj)
+	{
+		if (!isValid(loc)) {
+			throw new IllegalArgumentException("Location " + loc
+					+ " is not valid");
+		}
+		if (obj == null) {
+			throw new NullPointerException("obj == null");
+		}
+
+		// Add the object to the grid.
+		E oldOccupant = get(loc);
+		occupantArray.put(loc, obj);
+		return oldOccupant;
+	}
+
+	public E remove(Location loc)
+	{
+		if (!isValid(loc)) {
+			throw new IllegalArgumentException("Location " + loc
+					+ " is not valid");
+		}
+
+		// Remove the object from the grid.
+		E r = get(loc);
+		occupantArray.remove(loc);
+		return r;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

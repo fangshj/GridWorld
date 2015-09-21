@@ -1,0 +1,112 @@
+Set 3
+
+Assume the following statements when answering the following questions.
+	Location loc1 = new Location(4, 3);
+	Location loc2 = new Location(3, 4);
+
+1. How would you access the row value for loc1?
+	Answer : Using method of loc1.getRow(); 
+
+2. What is the value of b after the following statement is executed?
+   boolean b = loc1.equals(loc2);
+	Answer : b = false 
+
+3. What is the value of loc3 after the following statement is executed?
+   Location loc3 = loc2.getAdjacentLocation(Location.SOUTH);
+	Answer : loc3 has row 4, colum 4
+
+4. What is the value of dir after the following statement is executed?
+   int dir = loc1.getDirectionToward(new Location(6, 5));
+	Answer : dir = 135
+	
+5. How does the getAdjacentLocation method know which adjacent location to return?
+	Answer : Because the row values increase as you go south (down the screen) and the column values increase as you
+			 go east (to the right on the screen). For example, when the method get a parameter "Location.WEST" which
+			 means 270 degrees, it knows the column decrease by 1 and the row remain the same.
+
+
+Set 4
+
+1. How can you obtain a count of the objects in a grid? How can you obtain a count of the empty locations in a bounded grid?
+	Answer : 
+			 a. use the method of getOccupiedLocations().size() which return the size of the ccupied-location-arrayList 
+			 	which is the count of the objects in a grid.
+			 b. Assume Count as the number required, we have 
+			 	Count = getNumCols() * getNumRows() - getOccupiedLocations.size()
+
+2. How can you check if location (10,10) is in a grid?
+	Answer : isValid method will help, it returns true if loc is valid in this grid, false otherwise.
+	
+3. Grid contains method declarations, but no code is supplied in the methods. Why? Where can you find the implementations of these methods?
+	Answer : Put the declarations and implementations in different places make the code more standard, and the
+			 implementations is done in the classes that implemented the Grid like BoundGrid and UnboundedGrid.
+
+4. All methods that return multiple objects return them in an ArrayList. Do you think it would be a better design to return the objects in an array? Explain your answer.
+	Answer : No, I think ArrayList is still better for it's more flexible and can define its size dynamicly.
+
+
+Set 5
+
+1. Name three properties of every actor.
+	Answer : Color, Grid<Actor>, Location
+
+2. When an actor is constructed, what is its direction and color?
+	Answer : North and blue.
+
+3. Why do you think that the Actor class was created as a class instead of an interface?
+	Answer : Interface contains only methonds while Actor contains methonds and datas. The classes that extend
+			 the Actor class have states which need datas to record. So Actor class was created as a class instead of an interface.
+
+4. Can an actor put itself into a grid twice without first removing itself? Can an actor remove itself from a grid twice? Can an actor be placed into a grid, remove itself, and then put itself back? Try it out. What happens?
+	Answer : 
+			a. No, the program will report a message "This actor is already contained in a grid"
+			b. No, the program will report a message "This actor is not contained in a grid"
+			c. Yes, an actor can be placed into a grid, remove itself, and then put itself back. 
+			
+5. How can an actor turn 90 degrees to the right?
+	Answer :  setDirection method. The parameter will be the present direction plus 90 degrees.
+			  setDirection(getDirection() + Location.RIGHT);
+
+
+Set 6
+
+1. Which statement(s) in the canMove method ensures that a bug does not try to move out of its grid?
+	Answer : if (!gr.isValid(next))
+	
+2. Which statement(s) in the canMove method determines that a bug will not walk into a rock?
+	Answer : Actor neighbor = gr.get(next);
+	        return (neighbor == null) || (neighbor instanceof Flower);
+
+3. Which methods of the Grid interface are invoked by the canMove method and why?
+	Answer : 
+			a. isValid method, used to Checks whether the next location is valid in this grid.
+			b. get method, returns the object at the next grid to see if the bug can take the next place.
+
+4. Which method of the Location class is invoked by the canMove method and why?
+	Answer : getAdjacentLocation method, to get the location of the bug.
+
+5. Which methods inherited from the Actor class are invoked in the canMove method?
+	Answer : 
+			a. getGrid method, gets the grid in which this bug is located.
+			b. getLocation method, Gets the location of this bug.
+
+6. What happens in the move method when the location immediately in front of the bug is out of the grid?
+	Answer : It will remove itself frome the gird.
+
+7. Is the variable loc needed in the move method, or could it be avoided by calling getLocation() multiple times?
+	Answer : Yes, it's needed.
+
+8. Why do you think the flowers that are dropped by a bug have the same color as the bug?
+	Answer : Flower flower = new Flower(getColor()); getColor method returns the color of the bug, so they have the same color.
+
+9. When a bug removes itself from the grid, will it place a flower into its previous location?
+	Answer : 
+			a. It will not place a flower when its called by the Actor method.
+			b. It will place a flower when it's called by its own method move.
+
+10. Which statement(s) in the move method places the flower into the grid at the bug's previous location?
+	Answer : Flower flower = new Flower(getColor());
+	         flower.putSelfInGrid(gr, loc);
+
+11. If a bug needs to turn 180 degrees, how many times should it call the turn method?
+	Answer : 4 

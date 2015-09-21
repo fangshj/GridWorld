@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<project name="ZBug" default="run" basedir=".">
+
+<target name="clean">
+	<delete dir="classes"/>
+</target>
+
+<target name="compile">
+	<mkdir dir="classes"/>
+	<javac srcdir="src" destdir="classes" classpath="./../gridworld.jar" includeantruntime="on"/>
+</target>
+
+<target name="run" depends="compile">
+	<java classname="ZBugRunner" fork="yes">
+		<classpath>
+			<pathelement path="classes"/>
+			<pathelement path="./../gridworld.jar"/>
+		</classpath>
+	</java>
+</target>
+
+</project>
+

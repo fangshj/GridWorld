@@ -1,0 +1,7 @@
+About ant:
+	a. "ant run" will excute the JumperRunner program.
+	b. "ant" will excute the Test program.
+
+About test:
+	a. The test result files will be in the test dir after "build.xml" be excuted.
+	b. Click the "index.html" file in test dir, the test result will be displayed.

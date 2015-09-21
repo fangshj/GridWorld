@@ -1,0 +1,52 @@
+set 2
+
+1. What is the role of the instance variable sideLength? 
+	Answer : The role of the sideLength is to define the length of the square that the boxbug run.
+2. What is the role of the instance variable steps?
+	Answer : The role of the steps is to record how much step had the boxbug run to insure that the steps is smaller than the sideLength.
+3. Why is the turn method called twice when steps becomes equal to sideLength?
+	Answer : Turning twice is to make sure that the boxbug can traces out a square "box" cause the turn angle is 90 degree.
+4. Why can the move method be called in the BoxBug class when there is no move method in the BoxBug code?
+	Answer : The move method can be called in BoxBug is because the BoxBug class is inherited from the Bug class which has the move method.
+5. After a BoxBug is constructed, will the size of its square pattern always be the same? Why or why not?
+	Answer : Yes, the length will not change for the length is set in the construct function.
+6. Can the path a BoxBug travels ever change? Why or why not?
+	Answer : Yes, the path can change when the canMove function is not satisified.
+7. When will the value of steps be zero?
+	Answer : The steps will be 0 when steps is less than sideLength or canMove method is not satisified.
+
+Exercise
+
+In the following exercises, write a new class that extends the Bug class. Override the act method to define the new behavior.
+
+1. Write a class CircleBug that is identical to BoxBug, except that in the act method the turn method is called once instead of twice. How is its behavior different from a BoxBug?
+
+	Answer : The CircleBug traces out a circle instead of a aquare "box" when turn method is called once.
+
+2. Write a class SpiralBug that drops flowers in a spiral pattern. Hint: Imitate BoxBug, but adjust the side length when the bug turns. You may want to change the world to an UnboundedGrid to see the spiral pattern more clearly.
+
+	Answer : the key code is as followed
+		public void act()
+		{
+			if (steps < sideLength && canMove())
+			{
+				move();
+				steps++;
+			}
+			else
+			{
+				turn();
+				turn();
+				steps = 0;
+				sideLength++;  //  this line of code help the bug to spiral
+			}
+		}
+		
+5. Study the code for the BoxBugRunner class. Summarize the steps you would use to add another BoxBug actor to the grid.
+		
+	Answer : 
+		First step : Create a new BoxBug actor, such as
+					 BoxBug alice = new BoxBug(6);
+		Second step : Add the Bug into the World, such as
+					 world.add(new Location(7, 8), alice);
+					 

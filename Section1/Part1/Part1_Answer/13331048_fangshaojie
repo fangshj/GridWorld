@@ -1,0 +1,33 @@
+Set 1
+1. No, when it'a surrounded by rocks in all directions, it can't move.
+2. North -> Northeast -> East -> Southeast -> South -> Southwest -> West -> Northwest
+3. It will turn to face different direction which is showed in answer 2 above.
+4. A flower whose color is the same as itself.
+5. When the bug is facing the edge, it will turn to another direction untill it can move, and the order is as the answer 2 shows.
+   When the bug isn't facing the edge, it will turn to another direction untill it can move, and the order is as the answer 2 shows.
+6. It will turn to a different direction as the order shown in answer 2 untill it can move.
+7. No, a flower don't move.
+8. A flowe change the deepness of its color by time and becomes more and more light.
+9. No, a rock don't move or have any other behavior.
+10. No.
+
+Exercises
+1. Degrees	Compass Direction
+	0		North
+	45		Northeast
+	90		East
+	135		Southeast
+	180		South
+	225		Southwest
+	270		West
+	315		Northwest
+	360		North
+
+2. It's direction will not change.
+   The range is from (0, 0) to (9, 9).
+   The arguement will be considered as illegal.
+
+3. setColor will be used.
+
+4. The bug is missing.
+

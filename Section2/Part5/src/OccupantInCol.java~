@@ -1,0 +1,41 @@
+/*
+* AP(r) Computer Science GridWorld Case Study:
+* Copyright(c) 2005-2006 Cay S. Horstmann (http://horstmann.com)
+*
+* This code is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation.
+*
+* This code is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* @author Amin
+*/
+
+//  This class is used to store the linked list's entry of Grid
+
+public class OccupantInCol
+{
+    private Object occupant;
+    private int col;
+
+	private OccupantInCol(Object obj, int colNew) {
+		occupant = obj;
+		col = colNew;
+	}
+	public Object getObject() {
+		return occupant;	
+	}
+	public int getCol() {
+		return col;	
+	}
+
+	public void setObject(Object obj) {
+		occupant = obj;	
+	}
+	public void setCol(int colNew) {
+		col = colNew;	
+	}
+}
